@@ -35,6 +35,89 @@ public class MemberDao {
 		//필드에 저장된 참조값 리턴해주기
 		return dao;
 	}
+	//회원 한명의 정보를 수정하는 메소드
+	public boolean update(MemberDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int rowCount = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "UPDATE member"
+					+ " set name=?, addr=?"
+					+ " where num=?";
+			pstmt = conn.prepareStatement(sql);
+			//실행할 sql 문이 미완성이라면 여기서 완성
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getAddr());
+			pstmt.setInt(3, dto.getNum());
+			//sql 문을 수행하고 변화된(추가, 수정, 삭제된) row 의 갯수 리턴 받기
+			rowCount = pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		//만일 변화된 row 의 갯수가 0 보다 크면 작업 성공
+		if (rowCount > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	// 회원한명의 정보를 리턴하는 메소드
+	public MemberDto getData(int num) {
+		MemberDto dto = null;
+		// 필요한 객체의 참조값을 담을 지역변수 미리 만들기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection pool 에서 얻어오기)
+			conn = new DbcpBean().getConn();
+			// 실행할 sql 문
+			String sql = "Select name, addr"
+					+ " from member"
+					+ " where num=?";
+			pstmt = conn.prepareStatement(sql);
+			// sql 문이 미완성이라면 여기서 완성
+			pstmt.setInt(1, num);
+			// query 문 수행하고 결과값 받아오기
+			rs = pstmt.executeQuery();
+			// 반복문 돌면서 ResultSet에 담긴 내용 추출
+			while (rs.next()) {
+				//MemberDto 객체 생성해서
+				dto=new MemberDto();
+				dto.setNum(num);//번호는 지역 변수에 있는 값을 담고
+				//이름과 주소는 ResultSet 으로 부터 얻어내서
+				dto.setName(rs.getString("name"));
+				dto.setAddr(rs.getString("addr"));
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();// Connection 이 Connection Pool 에 반납된다.
+			} catch (Exception e) {
+			}
+		}
+		//회원 한명의 정보가 담긴 MemberDto 객체 리턴해주기
+		return dto;
+	}
+
+	
 	
 	//회원 한명의 정보를 삭제하는 메소드
 	public boolean delete(int num) {
@@ -82,8 +165,7 @@ public class MemberDao {
 			pstmt=conn.prepareStatement(sql);
 			//실행할 sql 문이 미완성이라면 여기서 작성
 			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getAddr()
-					);
+			pstmt.setString(2, dto.getAddr());
 			//sql 문을 수행하고 변화된 row의 갯수 리턴
 			rowCount=pstmt.executeUpdate();
 		}catch(SQLException se) {

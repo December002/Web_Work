@@ -16,6 +16,7 @@
 		<h1>인덱스 페이지 입니다.</h1>
 		<ul>
 			<li><a href="member/list.jsp">회원목록 보기</a></li>
+		    <li><a href="todo/list.jsp">할일 목록보기</a></li>
 		</ul>
 	</div>
 </body>
