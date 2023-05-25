@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">	
 </head>
 <body>
+	<jsp:include page="/include/navbar.jsp">
+		<jsp:param value="member" name="current"/>
+	</jsp:include>
 	<div class="container">
 		<h1>회원목록입니다.</h1>
 		<div class="text-end">

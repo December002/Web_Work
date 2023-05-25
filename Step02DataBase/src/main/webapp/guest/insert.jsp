@@ -3,18 +3,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	//1. 폼전송이 되는 방명록 작성자, 글내용을 읽어온다.
 	request.setCharacterEncoding("utf-8");
 	String writer=request.getParameter("writer");
 	String content=request.getParameter("content");
-	String pwd=request.getParameter("psw");
-	
+	String pwd=request.getParameter("pwd");
+	//2. DB에 저장한다.
 	GuestDto dto=new GuestDto();
 	dto.setWriter(writer);
 	dto.setContent(content);
 	dto.setPwd(pwd);
-	
 	GuestDao dao=GuestDao.getInstance();
 	boolean isSuccess=dao.insert(dto);
+	//3. 응답한다.
 %>
 <!DOCTYPE html>
 <html>
@@ -24,19 +25,20 @@
 <title>/guest/insert.jsp</title>
 </head>
 <body>
-	<div>
-		<h1>알림</h1>
-		<%if(isSuccess){ %>
-			<p class="alert alert-success">
-				<strong><%=writer %></strong> 님의 방명록이 저장되었습니다!
-				<a class="alert-link" href="list.jsp">확인</a>
-			</p>
+	<!-- 이 주석은 웹브라우저에게 출력되지만 웹브라우저가 무시하는 주석 -->
+	<%-- 이 주석은 jsp 페이지가 무시하는 주석 (웹브라우저에 출력되지 않는다) --%>
+	<%-- javascript 응답하기 --%>
+	
+	<script>
+		<%if(isSuccess){%>
+			//알림창 띄우기
+			alert("글을 성공적으로 등록 했습니다");
+			//java script 로 페이지 이동
+			location.href="${pageContext.request.contextPath }/guest/list.jsp";
 		<%}else{ %>
-			<p class="alert alert-warning">
-				회원정보 저장 실패!
-				<a class="alert-link" href="insertform.jsp">다시 작성</a>
-			</p>
+			alert("등록실패!");
+			location.href="${pageContext.request.contextPath }/guest/insertform.jsp";
 		<%} %>
-	</div>
+	</script>
 </body>
 </html>

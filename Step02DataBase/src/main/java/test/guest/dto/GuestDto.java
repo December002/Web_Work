@@ -1,6 +1,10 @@
 package test.guest.dto;
 
 public class GuestDto {
+	/*
+	 *  Dto 필드 선언하기
+	 *  
+	 */
 	private int num;
 	private String writer;
 	private String content;
