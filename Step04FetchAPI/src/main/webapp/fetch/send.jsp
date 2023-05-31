@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	//GET 방식 요청 파라미터 읽어오기
+	String msg=request.getParameter("msg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>index.jsp</title>
+<title>/fetch/send.jsp</title>
 </head>
 <body>
-	<div class="container">
-		<h1>인덱스 페이지 입니다</h1>
-		<ul>
-			<li><a href="promise/test01.jsp">Promise 테스트</a></li>
-			<li><a href="fetch/test01.jsp">Fetch 테스트</a></li>
-		</ul>
-	</div>
+	<p>클라이언트가 보낸 문자열 : <strong><%=msg %></strong></p>
 </body>
 </html>
