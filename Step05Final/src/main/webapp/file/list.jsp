@@ -16,6 +16,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>/file/list.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
@@ -45,15 +46,22 @@
 						</td>
 						<td><%=tmp.getRegdate() %></td>
 						<!-- 글작성자와 로그인된 아이디와 같을때만 삭제링크 출력하기 -->
-						<%if(tmp.getWriter().equals(id)){ %>
-							<td>
+						<td>
+							<%if(tmp.getWriter().equals(id)){ %>
 								<a href="delete.jsp?num=<%=tmp.getNum()%>">삭제</a>
-							</td>
-						<%} %> 
+							<%} %> 
+						</td> 
 					</tr>
 					<%} %>
 			</tbody>
 		</table>
+		<ul class="pagination">
+			<%for(int i=1; i<=10; i++) {%>
+				<li class=" v ">
+					<a href="list.jsp?pageNum=<%=i%>"><%=i %></a>
+				</li>
+			<%} %>
+		</ul>
 	</div>
 </body>
 </html>
