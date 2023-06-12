@@ -8,10 +8,14 @@ public class FileDto {
 	private String saveFileName;
 	private long fileSize; //파일의 크기는 byte 단위로 큰 정수를 쓰기 때문에 long int 를 사용한다.
 	private String regdate;
+	//페이징 처리에 관련된 필드
+	private int startRowNum;
+	private int endRowNum;
 	
 	public FileDto() {}
 	
-	
+
+
 
 	public FileDto(int num, String writer, String title, String orgFileName, String saveFileName, long fileSize,
 			String regdate) {
@@ -83,5 +87,25 @@ public class FileDto {
 		this.regdate = regdate;
 	}
 	
-	
+	public int getStartRowNum() {
+		return startRowNum;
+	}
+
+
+
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
+
+
+
+	public int getEndRowNum() {
+		return endRowNum;
+	}
+
+
+
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
+	}
 }

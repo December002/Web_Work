@@ -55,7 +55,7 @@
 			<%=writer %>님이 업로드한 <%=orgFileName %> 파일을 저장했습니다.
 			<a href="${pageContext.request.contextPath }/file/list.jsp">목록보기</a>
 		</p>
-		<p><%=realPath %></p>
+		<p><%=realPath %></p>	
 	<%}else{ %>
 		<p>
 		 	업로드 실패!

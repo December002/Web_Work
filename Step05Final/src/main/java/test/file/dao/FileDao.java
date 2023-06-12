@@ -22,6 +22,101 @@ public class FileDao {
 		return dao;
 	}
 	
+	//전체 글의 갯수를 리턴해주는 메소드
+	public int  getCount() {
+		//글의 갯수를 담을 지역변수
+		int count=0;
+		// 필요한 객체의 참조값을 담을 지역변수 미리 만들기
+		Connection conn = null;	
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			// DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection pool 에서 얻어오기)
+			conn = new DbcpBean().getConn();
+			// 실행할 sql 문
+			String sql = "SELECT MAX(ROWNUM) AS num FROM board_file";
+			pstmt = conn.prepareStatement(sql);
+			// sql 문이 미완성이라면 여기서 완성
+
+			// query 문 수행하고 결과값 받아오기
+			rs = pstmt.executeQuery();
+			// 반복문 돌면서 ResultSet에 담긴 내용 추출
+			while (rs.next()) {
+				count=rs.getInt("num");
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();// Connection 이 Connection Pool 에 반납된다.
+			} catch (Exception e) {
+			}
+		}
+		return count;
+	}
+	
+	//페이지에 해당하는 목록만 리턴하는 메소드
+		public List<FileDto> getList(FileDto dto){
+			//파일 목록을 담을 ArrayList 객체 생성 
+			List<FileDto> list=new ArrayList<FileDto>();
+			
+			//필요한 객체의 참조값을 담을 지역변수 미리 만들기
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				//DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection Pool 에서 얻어오기)
+				conn = new DbcpBean().getConn();
+				//실행할 sql 문 
+				String sql = "SELECT *"
+						+ "   FROM"
+						+ "        (SELECT result1.*, ROWNUM AS rnum"
+						+ "         FROM"
+						+ "             (SELECT num, writer, title, orgFileName, fileSize, regdate"
+						+ "              FROM board_file"
+						+ "              ORDER BY num DESC) result1)"
+						+ "   WHERE rnum BETWEEN ? AND ?";
+				pstmt = conn.prepareStatement(sql);
+				//sql 문이 미완성이라면 여기서 완성
+				pstmt.setInt(1, dto.getStartRowNum());
+				pstmt.setInt(2, dto.getEndRowNum());
+				//select 문 수행하고 결과값 받아오기
+				rs = pstmt.executeQuery();
+				//반복문 돌면서 ResultSet 에 담긴 내용 추출
+				while (rs.next()) {
+					//FileDto 객체에 select 된 row 하나의 정보를 담고
+					FileDto tmp=new FileDto();
+					tmp.setNum(rs.getInt("num"));
+					tmp.setWriter(rs.getString("writer"));
+					tmp.setTitle(rs.getString("title"));
+					tmp.setOrgFileName(rs.getString("orgFileName"));
+					tmp.setFileSize(rs.getLong("fileSize"));
+					tmp.setRegdate(rs.getString("regdate"));
+					//ArrayList 객체에 누적 시킨다.
+					list.add(tmp);
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close(); //Connection 이 Connection Pool 에 반납된다.
+				} catch (Exception e) {
+				}
+			}
+			return list;
+		}
+	
+	
 	public boolean delete(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
