@@ -49,7 +49,7 @@
          content 가 아래의 javascript 에서 사용 되기때문에 다른 이름으로 바꾸고 
             싶으면 javascript 에서  content 를 찾아서 모두 다른 이름으로 바꿔주면 된다. 
       5. textarea 의 크기가 SmartEditor  의 크기가 된다.
-      6. 폼을 제출하고 싶으면  submitContents(this) 라는 javascript 가 
+      6. 폼을 제출하고 싶으면  submitContents(this) 라는 javascript 가 zz
             폼 안에 있는 버튼에서 실행되면 된다.
     --%>
    
