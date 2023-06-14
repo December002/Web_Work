@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step01_event.html</title>
+</head>
+<body>
+	<h1>이벤트 테스트</h1>
+	<div id="app">
+		<!-- 
+			v-on:이벤트명="methods object 에 있는 호출될 함수명
+	 	<-->
+		<button v-on:click="clicked">눌러보셈</button>
+		<p>{{msg}}</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app", //id 가 app 인 요소 안에서 일어나는 일을 vue js 로 처리 및 관리를 하겠다는 의미
+			data:{
+				msg:""
+			},
+			methods:{
+				clicked:function(){
+					this.msg="버튼을 눌렀네요?"
+				}
+			}
+		})
+	</script>
+	<div>
+       <button onclick="clicked()">눌러보셈2</button>
+       <p id="one"></p>
+    </div>
+    <script>
+       // msg 라는 변수를 만들고 초기값을 지정한다.
+       let msg="";
+       // msg 변수 안에 있는 값을 id 가 one 인 요소의 innerText 로 출력한다(당연히 아무것도 출력되지 않음)
+       document.querySelector("#one").innerText=msg;
+       
+       //버튼을 눌렀을때 호출되는 함수
+       function clicked(){
+          //msg 변수 안에 있는 값을 바꾼다. (이걸 바꾼다고 해서 p 요소의 innerText 가 자동으로 바뀔리는 없겠죠?)
+          msg="버튼을 눌렀네여?"
+          //  p 요소의 innerText 가 수정되기 위해서는 아래의 코드가 필요하다.
+          document.querySelector("#one").innerText=msg;
+       }
+    </script>
+</body>
+</html>

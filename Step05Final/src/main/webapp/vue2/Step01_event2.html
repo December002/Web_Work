@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step02_event2.html</title>
+</head>
+<body>
+	<h1>이벤트 테스트2</h1>
+	<div id="app">
+		<button v-on:click="plus">+</button>
+		<!-- v-on: 을 줄여서 @ 로 대체할 수 있다 -->
+		<button @click="minus">-</button>
+		<p>{{count}}</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				count:0
+			},
+			methods:{
+				plus:function(){
+					this.count++
+				},
+				minus(){
+					this.count--
+				}
+			}
+		});
+	</script>
+</body>
+</html>

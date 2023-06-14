@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step01_event3.html</title>
+</head>
+<style>
+	.box{
+		width: 500px;
+		height: 500px;
+		border: 1px solid red;
+	}
+</style>
+<body>
+	<h1>이벤트 테스트</h1>
+	<div id="app">
+		<div class="box" v-on:mousemove="moved">
+			x: <strong>{{x}}</strong>
+			y: <strong>{{y}}</strong>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				x:0,
+				y:0
+			},
+			methods:{
+				moved(e){
+					this.x=e.offsetX;
+					this.y=e.offsetY;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

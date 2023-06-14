@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/vue2/hello.html</title>
+</head>
+<body>	
+	<h1>Hello vue js</h1>
+	<div id="app">
+		<p>오늘의 운세 : <strong>{{ fortune }}</strong></p>
+		<p>내이름은 : <strong>{{ myName }}</strong></p>
+		<button v-on:click="clicked">눌러보셈</button>
+		<button v-on:click="changed">내이름 바꾸기</button>
+		<br/>
+		<input type="text" v-model="msg"/>
+		<p>{{msg}}</p>
+		<br />
+		<h3>숫자 목록입니다</h3>
+		<ul>
+			<li v-for="item in nums">{{item}}</li>
+		</ul>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		// Vue 객체를 생성하면서 object 전달하기
+		new Vue({
+			el:"#app",
+			data:{
+				fortune:"동쪽으로 가면 귀인을 만나요",
+				myName:"박지용",
+				msg:"",
+				nums:[10, 20, 30]
+			},
+			methods:{
+				//여기서의 this #app 을 가르킨다
+				clicked:function(){
+					this.fortune="남쪽으로 가도 귀인을 만나요"
+				},
+				changed:function(){
+				this.myName="아무거나 "
+				}
+			}
+		});
+	</script>
+</body>
+</html>	
