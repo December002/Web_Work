@@ -50,6 +50,7 @@
    <div class="container">
       <h1>회원가입 결과</h1>
       <p>회원님의 정보를 성공적으로 저장했습니다.</p>
+     <!--  -->
       <p><%=hobbyResult %></p>
         <form action="signup.jsp" method="post">
             <div class="form-floating mb-2">

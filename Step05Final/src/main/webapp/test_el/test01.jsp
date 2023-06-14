@@ -32,7 +32,7 @@
    	<p>10 == 10 : ${10 == 10 }</p>
 	<p>10 == 10 : ${10 eq 10 }</p>
 	<p>10 != 10 : ${10 != 10 }</p>
-
+	
 	<h2>논리연산</h2>
 	<p>true || false : ${true || false }</p>
 	<p>true or false : ${true or false }</p>
