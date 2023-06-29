@@ -34,7 +34,7 @@
 	<h1>친구 목록</h1>
 	<ul>
 		<c:forEach var="tmp" items="${requestScope.list }">
-			<li>${tmp }</li>
+			<li>${tmp }</li>	
 		</c:forEach>
 	</ul>
 	

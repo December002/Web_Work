@@ -21,6 +21,7 @@
 <title>/test_jstl/hello.jsp</title>
 </head>
 <body>
+	<!-- var=변수명 -->
 	<h1>JSTL 의 core 라이브러리 사용해보기</h1>
 	<c:forEach var="i" begin="0" end="9" step="1">
 		<p>안녕 JSTL <strong>${i }</strong></p> 

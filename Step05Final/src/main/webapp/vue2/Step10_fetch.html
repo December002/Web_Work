@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step10_fetch.html</title>
+</head>
+<body>
+	<h1>ajax 요청을 통해서 받아온 데이터 사용하기</h1>
+	<p>페이지 전환없이 서버에 요청하는 것을 ajax 라고 생각하면 된다</p>
+	<div id="app">
+		<button @click="getList">글 목록 받아오기</button>
+		<br />
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>제목</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="tmp in list" v-bind:key="tmp.num">
+					<td>{{tmp.num}}</td>
+					<td>{{tmp.writer}}</td>
+					<td>{{tmp.title}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data:{
+				list:[]
+			},
+			methods:{
+				getList(){
+					//fetch 를 이용해서 서버에 데이터를 요청한다.
+					fetch("/Step05Final/cafe/json_list.jsp")
+					.then(res=>res.json())
+					.then(data=>{
+						//data 는 글목록이 들어있는 배열이다.
+						this.list=data;
+					});
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Step03_class3.html</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+</head>
+<body>
+   <h1>vue js 로 클래스 속성의 값 제어하기</h1>
+   <div id="app">
+      <button class="btn btn-primary btn-lg">버튼</button>
+      <button class="btn" v-bind:class="['btn-info', 'btn-lg']">Vue 버튼</button>
+      <button class="btn" v-bind:class="[isInfo ? 'btn-info' :'', isLg ? 'btn-lg' : '']">Vue 버튼2</button>
+      <button class="btn" v-bind:class="arr">vue 버튼3</button>
+      <br />
+      <label>
+         하늘색 버튼 <input type="checkbox" v-model="isInfo"/>
+      </label>
+      <label>
+         큰 버튼 <input type="checkbox" v-model="isLg"/>
+      </label>
+      <p>isPrimary:{{isPrimary}}</p>
+      <p>isLg:{{isLg}}</p>
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script>
+      new Vue({
+         el:"#app",
+         data:{
+        	isInfo:false,
+            isPrimary:false,
+            isLg:false,
+         },
+         //종속된 모델이 바뀌면 다시 호출되어서 연산된(computed) 값을 리턴하는 함수
+         computed:{
+        	 arr(){
+        		 
+        		 return [this.isInfo ? 'btn-info' :'', this.isLg ? 'btn-lg' : '']
+        	 }
+         }
+      });
+   </script>
+</body>
+</html>
+
+
+
+

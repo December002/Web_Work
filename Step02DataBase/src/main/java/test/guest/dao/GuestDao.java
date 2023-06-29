@@ -154,7 +154,7 @@ public class GuestDao {
 			pstmt = conn.prepareStatement(sql);
 			//실행할 sql 문이 미완성이라면 여기서 완성
 			pstmt.setString(1, dto.getWriter());
-			pstmt.setString(2, dto.getContent());
+			pstmt.setString(2, dto.getContent());		
 			pstmt.setString(3, dto.getPwd());
 			//sql 문을 수행하고 변화된(추가, 수정, 삭제된) row 의 갯수 리턴 받기
 			rowCount = pstmt.executeUpdate();
